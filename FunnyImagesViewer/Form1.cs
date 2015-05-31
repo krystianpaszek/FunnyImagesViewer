@@ -11,15 +11,12 @@ using System.Net;
 using HtmlAgilityPack;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web;
 
 namespace FunnyImagesViewer
 {
     public partial class Form1 : Form
     {
-
-        private List<String> imagesArray = new List<String>();
-        private List<SiteImage> images = new List<SiteImage>();
-        private int index = 0;
         private List<SiteParser> parserObjects = new List<SiteParser>();
         private ImagesManager imagesManager;
 
@@ -28,29 +25,31 @@ namespace FunnyImagesViewer
             InitializeComponent();
         }
 
-        private void addToOutputBox(string text) {
+        private void addToOutputBox(string text)
+        {
             outputBox.Text += text + '\n';
         }
 
         private void nextButton_Click(object sender, EventArgs e)
         {
-            index++;
-            if (index > 0) prevButton.Enabled = true;
-            if (index == imagesArray.Count()) ;
-            try { pictureBox.Load(); }
+            try
+            {
+                loadSiteImage(imagesManager.NextImage());
+                prevButton.Enabled = true;
+            }
             catch (Exception exception) { pictureBox.Image = pictureBox.ErrorImage; }
 
         }
 
         private void prevButton_Click(object sender, EventArgs e)
         {
-            if (index > 0)
+            try
             {
-                index--;
-                pictureBox.Load(imagesArray[index]);
+                loadSiteImage(imagesManager.PrevImage());
+                if (imagesManager.CurrentIndex() == 0) prevButton.Enabled = false;
+                nextButton.Enabled = true;
             }
-
-            if (index == 0) prevButton.Enabled = false;
+            catch (Exception exception) { pictureBox.Image = pictureBox.ErrorImage; }
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -70,12 +69,6 @@ namespace FunnyImagesViewer
 
         private void processButton_Click(object sender, EventArgs e)
         {
-            //WebClient w = new WebClient();
-            //String outputString = w.DownloadString(address);
-
-            //HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            //doc.LoadHtml(outputString);
-
             RunAsync();
         }
 
@@ -99,7 +92,8 @@ namespace FunnyImagesViewer
 
         private void gagCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (gagCheckBox.Checked) {
+            if (gagCheckBox.Checked)
+            {
                 parserObjects.Add(new _9gagParser(addToOutputBox));
             }
             else
@@ -109,13 +103,23 @@ namespace FunnyImagesViewer
                     if (parser is _9gagParser) parserObjects.Remove(parser);
                 }
             }
-            
+
         }
 
         private void goButton_Click(object sender, EventArgs e)
         {
             imagesManager = new ImagesManager(parserObjects);
-            this.images = imagesManager.getImages();
+            imagesManager.loadImages();
+            loadSiteImage(imagesManager.FirstImage());
+        }
+
+        private void loadSiteImage(SiteImage siteImage)
+        {
+            pictureBox.Load(siteImage.Address);
+            titleLabel.Text = WebUtility.HtmlDecode(siteImage.Title);
+            int total = imagesManager.Count();
+            int current = imagesManager.CurrentIndex();
+            countLabel.Text = current+1 + "/" + total;
         }
 
         private void outputBox_LinkClicked(object sender, LinkClickedEventArgs e)

@@ -146,18 +146,20 @@
             this.countLabel.AutoSize = true;
             this.countLabel.Location = new System.Drawing.Point(367, 439);
             this.countLabel.Name = "countLabel";
+            this.countLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.countLabel.Size = new System.Drawing.Size(24, 13);
             this.countLabel.TabIndex = 12;
             this.countLabel.Text = "0/0";
+            this.countLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // titleLabel
             // 
-            this.titleLabel.AutoSize = true;
-            this.titleLabel.Location = new System.Drawing.Point(217, 439);
+            this.titleLabel.Location = new System.Drawing.Point(93, 439);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(27, 13);
+            this.titleLabel.Size = new System.Drawing.Size(268, 13);
             this.titleLabel.TabIndex = 13;
             this.titleLabel.Text = "Title";
+            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 

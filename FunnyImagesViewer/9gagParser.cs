@@ -10,7 +10,7 @@ namespace FunnyImagesViewer
 {
     class _9gagParser : SiteParser
     {
-        private List<SiteImage> images = new List<SiteImage>();
+        private string lastImageId;
         private const string baseAddress = "http://m.9gag.com";
         private Action<String> outputBoxSetter;
 
@@ -23,15 +23,13 @@ namespace FunnyImagesViewer
             String address;
             List<SiteImage> localImages = new List<SiteImage>();
 
-            if (images.Count == 0)
+            if (lastImageId == null)
             {
                 address = baseAddress;
             }
             else
             {
-                String last = images.Last().Title;
-                String id = last.Split('/').Last().Split('_').First();
-                address = baseAddress + "?id=" + id + "&c=10'";
+                address = baseAddress + "?id=" + lastImageId + "&c=10'";
             }
 
             List<HtmlNode> results = getImagesLinks(address);
@@ -52,7 +50,8 @@ namespace FunnyImagesViewer
                 SiteImage image = new SiteImage(imageString, imageTitle);
                 localImages.Add(image);
             }
-            images = localImages;
+            String last = localImages.Last().Address;
+            lastImageId = last.Split('/').Last().Split('_').First();
 
             return localImages;
         }
