@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using System.Net;
 
-namespace Chapter_2___Program_4
+namespace FunnyImagesViewer
 {
     class _9gagParser : SiteParser
     {

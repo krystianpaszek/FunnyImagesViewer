@@ -12,7 +12,7 @@ using HtmlAgilityPack;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace Chapter_2___Program_4
+namespace FunnyImagesViewer
 {
     public partial class Form1 : Form
     {

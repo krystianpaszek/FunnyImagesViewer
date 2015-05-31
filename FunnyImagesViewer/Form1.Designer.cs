@@ -1,4 +1,4 @@
-﻿namespace Chapter_2___Program_4
+﻿namespace FunnyImagesViewer
 {
     partial class Form1
     {

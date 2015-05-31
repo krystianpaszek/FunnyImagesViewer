@@ -7,7 +7,7 @@
     <ProjectGuid>{B9C60A4A-D03A-4486-AC58-D11896EE3464}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Chapter_2___Program_4</RootNamespace>
+    <RootNamespace>FunnyImagesViewer</RootNamespace>
     <AssemblyName>Chapter 2 - Program 4</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -79,6 +79,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

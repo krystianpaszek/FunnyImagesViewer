@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 
-namespace Chapter_2___Program_4
+namespace FunnyImagesViewer
 {
     abstract class SiteParser
     {
