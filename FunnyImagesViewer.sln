@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chapter 2 - Program 4", "Chapter 2 - Program 4\Chapter 2 - Program 4.csproj", "{B9C60A4A-D03A-4486-AC58-D11896EE3464}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunnyImagesViewer", "FunnyImagesViewer\FunnyImagesViewer.csproj", "{B9C60A4A-D03A-4486-AC58-D11896EE3464}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
