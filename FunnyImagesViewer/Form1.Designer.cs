@@ -40,6 +40,7 @@
             this.goButton = new System.Windows.Forms.Button();
             this.countLabel = new System.Windows.Forms.Label();
             this.titleLabel = new System.Windows.Forms.Label();
+            this.saveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -49,7 +50,7 @@
             this.addressTextBox.Location = new System.Drawing.Point(12, 12);
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.ReadOnly = true;
-            this.addressTextBox.Size = new System.Drawing.Size(460, 20);
+            this.addressTextBox.Size = new System.Drawing.Size(379, 20);
             this.addressTextBox.TabIndex = 0;
             this.addressTextBox.Text = "http://m.9gag.com";
             // 
@@ -161,11 +162,22 @@
             this.titleLabel.Text = "Title";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(397, 10);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 14;
+            this.saveButton.Text = "Save image";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1052, 469);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.countLabel);
             this.Controls.Add(this.goButton);
@@ -203,6 +215,7 @@
         private System.Windows.Forms.Button goButton;
         private System.Windows.Forms.Label countLabel;
         private System.Windows.Forms.Label titleLabel;
+        private System.Windows.Forms.Button saveButton;
 
     }
 }

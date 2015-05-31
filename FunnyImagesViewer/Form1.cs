@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -118,6 +119,33 @@ namespace FunnyImagesViewer
         private void outputBox_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(e.LinkText);
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Images|*.png;*.bmp;*.jpg;";
+            ImageFormat format = ImageFormat.Png;
+            if (pictureBox.Image.RawFormat.Guid == ImageFormat.Gif.Guid)
+            {
+                MessageBox.Show("Can't save GIFs.");
+                return;
+            }
+            
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string ext = System.IO.Path.GetExtension(sfd.FileName);
+                switch (ext)
+                {
+                    case ".jpg":
+                        format = ImageFormat.Jpeg;
+                        break;
+                    case ".bmp":
+                        format = ImageFormat.Bmp;
+                        break;
+                }
+                pictureBox.Image.Save(sfd.FileName, format);
+            }
         }
     }
 }
