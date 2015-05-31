@@ -38,14 +38,21 @@ namespace Chapter_2___Program_4
 
             foreach (HtmlNode link in results)
             {
-                String imageString = link.Descendants("img").ToList()[0].GetAttributeValue("src", null);
+                HtmlNode img = link.Descendants("img").ToList()[0];
+                HtmlNode a = link.Descendants("a").ToList()[0];
+                String imageString = img.GetAttributeValue("src", null);
+                String imageTitle = img.GetAttributeValue("alt", null);
+                String classString = a.GetAttributeValue("class", "no class");
+                if (classString.Equals("badge-animated-cover"))
+                {
+                    imageString = a.Descendants("div").ToList()[0].GetAttributeValue("data-image", null);
+                }
                 if (!imageString.Substring(0, 4).Equals("http")) { imageString = "http:" + imageString; }
                 outputBoxSetter(imageString);
-                //outputBox.Text += imageString + "\n";
-                SiteImage image = new SiteImage(imageString, "tytuł");
+                SiteImage image = new SiteImage(imageString, imageTitle);
                 localImages.Add(image);
-                images = localImages;
             }
+            images = localImages;
 
             return localImages;
         }

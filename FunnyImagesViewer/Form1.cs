@@ -26,69 +26,18 @@ namespace Chapter_2___Program_4
         public Form1()
         {
             InitializeComponent();
-
-            //String address = addressTextBox.Text;
-            //List<HtmlNode> results = getImagesLinks(address);
-            //getImages();
-            //pictureBox.Load(imagesArray[index]);
-        }
-
-        private void outputTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start(e.LinkText);
-        }
-
-        private List<HtmlNode> getImagesLinks(String address)
-        {
-            WebClient w = new WebClient();
-            String outputString = w.DownloadString(address);
-
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(outputString);
-
-            List<HtmlNode> results = doc.DocumentNode.Descendants().
-                Where(x => (x.Name == "div" && x.Attributes["class"] != null && x.Attributes["class"].Value.Contains("badge-archive-box post-container"))).ToList();
-
-            return results;
         }
 
         private void addToOutputBox(string text) {
-            outputBox.Text += text;
-        }
-
-        private void getImages()
-        {
-            String address;
-
-            if (imagesArray.Count == 0)
-            {
-                address = addressTextBox.Text;
-            }
-            else
-            {
-                String last = imagesArray.Last();
-                String id = last.Split('/').Last().Split('_').First();
-                address = addressTextBox.Text + "?id=" + id + "&c=10'";
-            }
-
-            List<HtmlNode> results = getImagesLinks(address);
-
-            foreach (HtmlNode link in results)
-            {
-                String imageString = link.Descendants("img").ToList()[0].GetAttributeValue("src", null);
-                if (!imageString.Substring(0, 4).Equals("http")) { imageString = "http:" + imageString; }
-                //outputTextBox.Text += imageString + "\n";
-                imagesArray.Add(imageString);
-            }
-
+            outputBox.Text += text + '\n';
         }
 
         private void nextButton_Click(object sender, EventArgs e)
         {
             index++;
             if (index > 0) prevButton.Enabled = true;
-            if (index == imagesArray.Count()) getImages();
-            try { pictureBox.Load(imagesArray[index]); }
+            if (index == imagesArray.Count()) ;
+            try { pictureBox.Load(); }
             catch (Exception exception) { pictureBox.Image = pictureBox.ErrorImage; }
 
         }
@@ -151,7 +100,6 @@ namespace Chapter_2___Program_4
         private void gagCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (gagCheckBox.Checked) {
-                //System.Console.WriteLine("9gag selected");
                 parserObjects.Add(new _9gagParser(addToOutputBox));
             }
             else
@@ -160,7 +108,6 @@ namespace Chapter_2___Program_4
                 {
                     if (parser is _9gagParser) parserObjects.Remove(parser);
                 }
-                //System.Console.WriteLine("9gag removed");
             }
             
         }
@@ -169,6 +116,11 @@ namespace Chapter_2___Program_4
         {
             imagesManager = new ImagesManager(parserObjects);
             this.images = imagesManager.getImages();
+        }
+
+        private void outputBox_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.LinkText);
         }
     }
 }
