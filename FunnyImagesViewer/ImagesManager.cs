@@ -18,7 +18,7 @@ namespace FunnyImagesViewer
         {
             foreach (SiteParser parser in parsers) {
                 List<SiteImage> l = parser.getImages();
-                images.AddRange(l);
+                if (l != null) images.AddRange(l);
             }
         }
 

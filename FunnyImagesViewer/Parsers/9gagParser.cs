@@ -45,7 +45,7 @@ namespace FunnyImagesViewer
                 }
                 if (!imageString.Substring(0, 4).Equals("http")) { imageString = "http:" + imageString; }
                 outputBoxSetter(imageString);
-                SiteImage image = new SiteImage(imageString, imageTitle);
+                SiteImage image = new SiteImage(imageString, imageTitle, "9gag");
                 localImages.Add(image);
             }
             String last = localImages.Last().Address;

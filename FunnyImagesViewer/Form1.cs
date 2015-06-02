@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FunnyImagesViewer.Parsers;
+using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Net;
@@ -63,7 +64,8 @@ namespace FunnyImagesViewer
 
         private void processButton_Click(object sender, EventArgs e)
         {
-            RunAsync();
+            ImgurParser parser = new ImgurParser(addToOutputBox);
+            parser.getImages();
         }
 
         async Task RunAsync()
@@ -114,6 +116,7 @@ namespace FunnyImagesViewer
             int total = imagesManager.Count();
             int current = imagesManager.CurrentIndex();
             countLabel.Text = current+1 + "/" + total;
+            siteLabel.Text = siteImage.Site;
         }
 
         private void outputBox_LinkClicked(object sender, LinkClickedEventArgs e)
@@ -145,6 +148,21 @@ namespace FunnyImagesViewer
                         break;
                 }
                 pictureBox.Image.Save(sfd.FileName, format);
+            }
+        }
+
+        private void imgurCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (imgurCheckBox.Checked)
+            {
+                parserObjects.Add(new ImgurParser(addToOutputBox));
+            }
+            else
+            {
+                foreach (SiteParser parser in parserObjects)
+                {
+                    if (parser is ImgurParser) parserObjects.Remove(parser);
+                }
             }
         }
     }
