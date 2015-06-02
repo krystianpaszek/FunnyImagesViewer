@@ -45,6 +45,8 @@
             this._9gagProcessButton = new System.Windows.Forms.Button();
             this.kwejkProcessButton = new System.Windows.Forms.Button();
             this.demotywatoryProcessButton = new System.Windows.Forms.Button();
+            this.demotywatoryCheckBox = new System.Windows.Forms.CheckBox();
+            this.kwejkCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -216,12 +218,36 @@
             this.demotywatoryProcessButton.TabIndex = 19;
             this.demotywatoryProcessButton.Text = "demotywatory";
             this.demotywatoryProcessButton.UseVisualStyleBackColor = true;
+            this.demotywatoryProcessButton.Click += new System.EventHandler(this.demotywatoryProcessButton_Click);
+            // 
+            // demotywatoryCheckBox
+            // 
+            this.demotywatoryCheckBox.AutoSize = true;
+            this.demotywatoryCheckBox.Location = new System.Drawing.Point(968, 59);
+            this.demotywatoryCheckBox.Name = "demotywatoryCheckBox";
+            this.demotywatoryCheckBox.Size = new System.Drawing.Size(91, 17);
+            this.demotywatoryCheckBox.TabIndex = 20;
+            this.demotywatoryCheckBox.Text = "demotywatory";
+            this.demotywatoryCheckBox.UseVisualStyleBackColor = true;
+            this.demotywatoryCheckBox.CheckedChanged += new System.EventHandler(this.demotywatoryCheckBox_CheckedChanged);
+            // 
+            // kwejkCheckBox
+            // 
+            this.kwejkCheckBox.AutoSize = true;
+            this.kwejkCheckBox.Location = new System.Drawing.Point(968, 83);
+            this.kwejkCheckBox.Name = "kwejkCheckBox";
+            this.kwejkCheckBox.Size = new System.Drawing.Size(54, 17);
+            this.kwejkCheckBox.TabIndex = 21;
+            this.kwejkCheckBox.Text = "kwejk";
+            this.kwejkCheckBox.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1052, 469);
+            this.Controls.Add(this.kwejkCheckBox);
+            this.Controls.Add(this.demotywatoryCheckBox);
             this.Controls.Add(this.demotywatoryProcessButton);
             this.Controls.Add(this.kwejkProcessButton);
             this.Controls.Add(this._9gagProcessButton);
@@ -269,6 +295,8 @@
         private System.Windows.Forms.Button _9gagProcessButton;
         private System.Windows.Forms.Button kwejkProcessButton;
         private System.Windows.Forms.Button demotywatoryProcessButton;
+        private System.Windows.Forms.CheckBox demotywatoryCheckBox;
+        private System.Windows.Forms.CheckBox kwejkCheckBox;
 
     }
 }

@@ -24,18 +24,18 @@ namespace FunnyImagesViewer.Parsers
 
         public override List<SiteImage> getImages()
         {
+            arrayIndex += 10;
             if (arrayIndex >= images.Count)
             {
                 m(arrayIndex);
             }
-            arrayIndex += 10;
 
-            return images.GetRange(arrayIndex, 10);
+            return images.GetRange(arrayIndex-10, 10);
         }
 
         private void m(int offset)
         {
-            WebRequest req = WebRequest.Create(baseUrl + "gallery/t/funny/viral");
+            WebRequest req = WebRequest.Create(baseUrl + "gallery/t/funny/viral/" + offset/60);
             req.Method = "GET";
             req.Headers["Authorization"] = "Client-ID " + client_id;
             HttpWebResponse resp = req.GetResponse() as HttpWebResponse;

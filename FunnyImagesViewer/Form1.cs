@@ -14,6 +14,7 @@ namespace FunnyImagesViewer
     {
         private List<SiteParser> parserObjects = new List<SiteParser>();
         private ImagesManager imagesManager;
+        private SiteParser testingParser;
 
         public Form1()
         {
@@ -64,8 +65,8 @@ namespace FunnyImagesViewer
 
         private void processButton_Click(object sender, EventArgs e)
         {
-            ImgurParser parser = new ImgurParser(addToOutputBox);
-            parser.getImages();
+            if (testingParser == null) testingParser = new ImgurParser(addToOutputBox);
+            testingParser.getImages();
         }
 
         async Task RunAsync()
@@ -111,7 +112,14 @@ namespace FunnyImagesViewer
 
         private void loadSiteImage(SiteImage siteImage)
         {
-            pictureBox.Load(siteImage.Address);
+            try
+            {
+                pictureBox.Load(siteImage.Address);
+            }
+            catch (Exception exception)
+            {
+                pictureBox.Image = pictureBox.ErrorImage;
+            }
             titleLabel.Text = WebUtility.HtmlDecode(siteImage.Title);
             int total = imagesManager.Count();
             int current = imagesManager.CurrentIndex();
@@ -166,6 +174,21 @@ namespace FunnyImagesViewer
             }
         }
 
+        private void demotywatoryCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (demotywatoryCheckBox.Checked)
+            {
+                parserObjects.Add(new DemotywatoryParser(addToOutputBox));
+            }
+            else
+            {
+                foreach (SiteParser parser in parserObjects)
+                {
+                    if (parser is DemotywatoryParser) parserObjects.Remove(parser);
+                }
+            }
+        }
+
         private void _9gagProcessButton_Click(object sender, EventArgs e)
         {
             _9gagParser parser = new _9gagParser(addToOutputBox);
@@ -177,5 +200,13 @@ namespace FunnyImagesViewer
             KwejkParser parser = new KwejkParser(addToOutputBox);
             parser.getImages();
         }
+
+        private void demotywatoryProcessButton_Click(object sender, EventArgs e)
+        {
+            DemotywatoryParser parser = new DemotywatoryParser(addToOutputBox);
+            parser.getImages();
+        }
+
+        
     }
 }
