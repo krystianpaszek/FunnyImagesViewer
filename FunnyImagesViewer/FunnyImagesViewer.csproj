@@ -65,7 +65,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="ImagesManager.cs" />
+    <Compile Include="Parsers\DemotywatoryParser.cs" />
     <Compile Include="Parsers\ImgurParser.cs" />
+    <Compile Include="Parsers\KwejkParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SiteImage.cs" />

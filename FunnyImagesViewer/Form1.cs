@@ -165,5 +165,11 @@ namespace FunnyImagesViewer
                 }
             }
         }
+
+        private void _9gagProcessButton_Click(object sender, EventArgs e)
+        {
+            _9gagParser parser = new _9gagParser(addToOutputBox);
+            parser.getImages()
+        }
     }
 }

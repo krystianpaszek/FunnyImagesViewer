@@ -17,7 +17,7 @@ namespace FunnyImagesViewer
         {
             Address = address;
             Title = title;
-            Site = Site;
+            Site = site;
         }
     }
 }

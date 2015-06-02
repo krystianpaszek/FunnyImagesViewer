@@ -33,8 +33,6 @@ namespace FunnyImagesViewer.Parsers
             return images.GetRange(arrayIndex, 10);
         }
 
-        
-
         private void m(int offset)
         {
             WebRequest req = WebRequest.Create(baseUrl + "gallery/t/funny/viral");
@@ -49,11 +47,14 @@ namespace FunnyImagesViewer.Parsers
             JObject joResponse = JObject.Parse(responseString);
             JArray array = (JArray)joResponse["data"]["items"];
 
+            outputBoxSetter("Imgur:");
+
             foreach (JToken jToken in array)
             {
                 SiteImage siteImage = JsonConvert.DeserializeObject<SiteImage>(jToken.ToString());
                 siteImage.Site = "Imgur";
                 images.Add(siteImage);
+                outputBoxSetter(siteImage.Address);
             }
         }
     }

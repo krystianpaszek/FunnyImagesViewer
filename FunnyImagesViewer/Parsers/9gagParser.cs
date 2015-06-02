@@ -32,6 +32,8 @@ namespace FunnyImagesViewer
 
             List<HtmlNode> results = getImagesLinks(address);
 
+            outputBoxSetter("9gag:");
+
             foreach (HtmlNode link in results)
             {
                 HtmlNode img = link.Descendants("img").ToList()[0];
