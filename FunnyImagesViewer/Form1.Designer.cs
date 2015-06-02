@@ -206,6 +206,7 @@
             this.kwejkProcessButton.TabIndex = 18;
             this.kwejkProcessButton.Text = "kwejk";
             this.kwejkProcessButton.UseVisualStyleBackColor = true;
+            this.kwejkProcessButton.Click += new System.EventHandler(this.kwejkProcessButton_Click);
             // 
             // demotywatoryProcessButton
             // 

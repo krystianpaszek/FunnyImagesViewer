@@ -169,7 +169,13 @@ namespace FunnyImagesViewer
         private void _9gagProcessButton_Click(object sender, EventArgs e)
         {
             _9gagParser parser = new _9gagParser(addToOutputBox);
-            parser.getImages()
+            parser.getImages();
+        }
+
+        private void kwejkProcessButton_Click(object sender, EventArgs e)
+        {
+            KwejkParser parser = new KwejkParser(addToOutputBox);
+            parser.getImages();
         }
     }
 }

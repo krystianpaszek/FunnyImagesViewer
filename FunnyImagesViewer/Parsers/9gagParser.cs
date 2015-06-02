@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 
 namespace FunnyImagesViewer
 {
@@ -61,8 +62,10 @@ namespace FunnyImagesViewer
             WebClient w = new WebClient();
             String outputString = w.DownloadString(address);
 
+
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(outputString);
+            //doc.LoadHtml(outputString);
+            doc.Load(w.OpenRead(address), Encoding.UTF8);
 
             List<HtmlNode> results = doc.DocumentNode.Descendants().
                 Where(x => (x.Name == "div" && x.Attributes["class"] != null && x.Attributes["class"].Value.Contains("badge-archive-box post-container"))).ToList();

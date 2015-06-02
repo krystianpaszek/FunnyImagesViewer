@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace FunnyImagesViewer.Parsers
 {
-    class DemotywatoryParser
+    class DemotywatoryParser : SiteParser
     {
+        public override List<SiteImage> getImages()
+        {
+            return null;
+        }
     }
 }
