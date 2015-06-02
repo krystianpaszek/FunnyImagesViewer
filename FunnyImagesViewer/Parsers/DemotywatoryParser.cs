@@ -28,7 +28,7 @@ namespace FunnyImagesViewer.Parsers
                 images.AddRange(m());
             }
 
-            return images.GetRange(count*10, 10);
+            return images.GetRange(count*10-10, 10);
         }
 
         private List<SiteImage> m()

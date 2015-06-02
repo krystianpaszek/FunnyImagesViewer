@@ -197,14 +197,14 @@ namespace FunnyImagesViewer
 
         private void kwejkProcessButton_Click(object sender, EventArgs e)
         {
-            KwejkParser parser = new KwejkParser(addToOutputBox);
-            parser.getImages();
+            if (testingParser == null) testingParser = new KwejkParser(addToOutputBox);
+            testingParser.getImages();
         }
 
         private void demotywatoryProcessButton_Click(object sender, EventArgs e)
         {
-            DemotywatoryParser parser = new DemotywatoryParser(addToOutputBox);
-            parser.getImages();
+            if (testingParser == null) testingParser = new DemotywatoryParser(addToOutputBox);
+            testingParser.getImages();
         }
 
         
