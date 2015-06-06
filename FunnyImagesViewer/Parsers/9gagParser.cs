@@ -11,31 +11,18 @@ namespace FunnyImagesViewer
     {
         private string lastImageId;
         private const string baseAddress = "http://m.9gag.com";
-        private Action<String> outputBoxSetter;
 
-        public _9gagParser(Action<String> outputBoxSetter)
-        {
-            this.outputBoxSetter = outputBoxSetter;
-        }
+        public _9gagParser(Action<String> outputBoxSetter) : base(outputBoxSetter) { }
 
-        public override List<SiteImage> getImages() {
-            String address;
-            List<SiteImage> localImages = new List<SiteImage>();
-
-            if (lastImageId == null)
-            {
-                address = baseAddress;
-            }
-            else
-            {
-                address = baseAddress + "?id=" + lastImageId + "&c=10'";
-            }
-
-            List<HtmlNode> results = getImagesLinks(address);
-
+        protected override void fetchMoreImages() {
             outputBoxSetter("9gag:");
 
-            foreach (HtmlNode link in results)
+            processNodes(getImagesNodes(getNextPageAdress()));
+        }
+
+        private void processNodes(List<HtmlNode> nodes)
+        {
+            foreach (HtmlNode link in nodes)
             {
                 HtmlNode img = link.Descendants("img").ToList()[0];
                 HtmlNode a = link.Descendants("a").ToList()[0];
@@ -47,24 +34,39 @@ namespace FunnyImagesViewer
                     imageString = a.Descendants("div").ToList()[0].GetAttributeValue("data-image", null);
                 }
                 if (!imageString.Substring(0, 4).Equals("http")) { imageString = "http:" + imageString; }
-                outputBoxSetter(imageString);
-                SiteImage image = new SiteImage(imageString, imageTitle, "9gag");
-                localImages.Add(image);
+                if (!imageString.Contains("nsfw"))
+                {
+                    outputBoxSetter(imageString);
+                    SiteImage image = new SiteImage(imageString, imageTitle, "9gag");
+                    images.Add(image);
+                }
             }
-            String last = localImages.Last().Address;
-            lastImageId = last.Split('/').Last().Split('_').First();
 
-            return localImages;
+            String last = images.Last().Address;
+            lastImageId = last.Split('/').Last().Split('_').First();
         }
 
-        private List<HtmlNode> getImagesLinks(String address)
+        private string getNextPageAdress()
+        {
+            String address;
+
+            if (lastImageId == null)
+            {
+                address = baseAddress;
+            }
+            else
+            {
+                address = baseAddress + "?id=" + lastImageId + "&c=10'";
+            }
+
+            return address;
+        }
+
+        private List<HtmlNode> getImagesNodes(String address)
         {
             WebClient w = new WebClient();
-            String outputString = w.DownloadString(address);
-
 
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            //doc.LoadHtml(outputString);
             doc.Load(w.OpenRead(address), Encoding.UTF8);
 
             List<HtmlNode> results = doc.DocumentNode.Descendants().

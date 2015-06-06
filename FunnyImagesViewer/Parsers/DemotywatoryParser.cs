@@ -11,42 +11,24 @@ namespace FunnyImagesViewer.Parsers
     class DemotywatoryParser : SiteParser
     {
         private const string baseAddress = "http://m.demotywatory.pl";
-        private Action<String> outputBoxSetter;
-        private int page = 1;
-        private int count = 0;
-        List<SiteImage> images = new List<SiteImage>();
 
-        public DemotywatoryParser(Action<String> outputBoxSetter)
-        {
-            this.outputBoxSetter = outputBoxSetter;
-        }
+        public DemotywatoryParser(Action<String> outputBoxSetter) : base(outputBoxSetter) { }
 
-        public override List<SiteImage> getImages()
-        {
-            count++;
-            while (images.Count < count*10) {
-                images.AddRange(m());
-            }
-
-            return images.GetRange(count*10-10, 10);
-        }
-
-        private List<SiteImage> m()
+        protected override void fetchMoreImages()
         {
             String address;
-            List<SiteImage> localImages = new List<SiteImage>();
 
-            if (page == 1)
+            if (currentPage == 1)
             {
                 address = baseAddress;
             }
             else
             {
-                address = baseAddress + "/page/" + page;
+                address = baseAddress + "/page/" + currentPage;
             }
-            page++;
+            currentPage++;
 
-            List<HtmlNode> results = getImagesLinks(address);
+            List<HtmlNode> results = getImagesNodes(address);
 
             outputBoxSetter("demotywatory.pl:");
 
@@ -57,13 +39,11 @@ namespace FunnyImagesViewer.Parsers
 
                 outputBoxSetter(imageString);
                 SiteImage image = new SiteImage(imageString, imageTitle, "demotywatory.pl");
-                localImages.Add(image);
+                images.Add(image);
             }
-
-            return localImages;
         }
 
-        private List<HtmlNode> getImagesLinks(String address)
+        private List<HtmlNode> getImagesNodes(String address)
         {
             WebClient w = new WebClient();
             String outputString = w.DownloadString(address);

@@ -12,30 +12,12 @@ namespace FunnyImagesViewer.Parsers
     {
         private static string client_id = "4619cb2dd0598ff";
         private static string baseUrl = "https://api.imgur.com/3/";
-        private List<SiteImage> images = new List<SiteImage>();
-        private int arrayIndex = 0;
 
-        private Action<String> outputBoxSetter;
+        public ImgurParser(Action<String> outputBoxSetter) : base(outputBoxSetter) { }
 
-        public ImgurParser(Action<String> outputBoxSetter)
+        protected override void fetchMoreImages()
         {
-            this.outputBoxSetter = outputBoxSetter;
-        }
-
-        public override List<SiteImage> getImages()
-        {
-            arrayIndex += 10;
-            if (arrayIndex >= images.Count)
-            {
-                m(arrayIndex);
-            }
-
-            return images.GetRange(arrayIndex-10, 10);
-        }
-
-        private void m(int offset)
-        {
-            WebRequest req = WebRequest.Create(baseUrl + "gallery/t/funny/viral/" + offset/60);
+            WebRequest req = WebRequest.Create(baseUrl + "gallery/t/funny/viral/" + currentPage/60);
             req.Method = "GET";
             req.Headers["Authorization"] = "Client-ID " + client_id;
             HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
