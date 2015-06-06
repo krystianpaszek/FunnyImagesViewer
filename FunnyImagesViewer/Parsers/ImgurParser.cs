@@ -12,6 +12,7 @@ namespace FunnyImagesViewer.Parsers
     {
         private static string client_id = "4619cb2dd0598ff";
         private static string baseUrl = "https://api.imgur.com/3/";
+        private int currentGalleryPage = 0;
 
         public ImgurParser(Action<String> outputBoxSetter) : base(outputBoxSetter) { }
 
@@ -38,7 +39,8 @@ namespace FunnyImagesViewer.Parsers
 
         private HttpWebResponse getNextResponse()
         {
-            WebRequest req = WebRequest.Create(baseUrl + "gallery/t/funny/viral/" + currentPage);
+            currentGalleryPage++;
+            WebRequest req = WebRequest.Create(baseUrl + "gallery/t/funny/viral/" + currentGalleryPage);
             req.Method = "GET";
             req.Headers["Authorization"] = "Client-ID " + client_id;
             HttpWebResponse resp = req.GetResponse() as HttpWebResponse;

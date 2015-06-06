@@ -17,7 +17,8 @@ namespace FunnyImagesViewer.Parsers
 
         protected override void fetchMoreImages()
         {
-            processNodes(getImagesNodes());
+            outputBoxSetter("9gag:");
+            processNodes(getImagesNodes(getNextPageAdress()));
         }
 
         private string getNextPageAdress()
@@ -36,12 +37,12 @@ namespace FunnyImagesViewer.Parsers
             return address;
         }
 
-        private List<HtmlNode> getImagesNodes()
+        private List<HtmlNode> getImagesNodes(string address)
         {
             WebClient w = new WebClient();
 
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.Load(w.OpenRead(getNextPageAdress()), Encoding.UTF8);
+            doc.Load(w.OpenRead(address), Encoding.UTF8);
 
             List<HtmlNode> results = doc.DocumentNode.Descendants().
                 Where(x => (x.Name == "a" && x.Attributes["data-track-action"] != null && x.Attributes["data-track-action"].Value.IndexOf("Tre") != -1)).ToList();
