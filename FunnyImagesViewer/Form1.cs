@@ -19,11 +19,12 @@ namespace FunnyImagesViewer
         public Form1()
         {
             InitializeComponent();
+            panel1.HorizontalScroll.Enabled = false;
         }
 
         private void addToOutputBox(string text)
         {
-            outputBox.Text += text + '\n';
+            //outputBox.Text += text + '\n';
         }
 
         private void nextButton_Click(object sender, EventArgs e)
@@ -52,11 +53,17 @@ namespace FunnyImagesViewer
         {
             switch (e.KeyCode)
             {
-                case Keys.Right:
+                case Keys.M:
                     nextButton.PerformClick();
                     break;
-                case Keys.Left:
+                case Keys.N:
                     prevButton.PerformClick();
+                    break;
+                case Keys.Space:
+                    saveButton.PerformClick();
+                    break;
+                case Keys.Enter:
+                    goButton.PerformClick();
                     break;
                 default:
                     break;
@@ -67,24 +74,6 @@ namespace FunnyImagesViewer
         {
             if (testingParser == null) testingParser = new ImgurParser(addToOutputBox);
             testingParser.getImages();
-        }
-
-        async Task RunAsync()
-        {
-            using (var client = new HttpClient())
-            {
-                // TODO - Send HTTP requests
-
-                client.BaseAddress = new Uri("http://api.openweathermap.org/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                HttpResponseMessage response = await client.GetAsync("data/2.5/weather?q=London,uk");
-                if (response.IsSuccessStatusCode)
-                {
-                    outputBox.Text = await response.Content.ReadAsStringAsync();
-                }
-            }
         }
 
         private void goButton_Click(object sender, EventArgs e)
@@ -111,9 +100,17 @@ namespace FunnyImagesViewer
                 parserObjects.Add(new ImgurParser(addToOutputBox));
             }
 
-            imagesManager = new ImagesManager(parserObjects);
-            imagesManager.loadImages();
-            loadSiteImage(imagesManager.FirstImage());
+            if (parserObjects.Count > 0)
+            {
+                imagesManager = new ImagesManager(parserObjects);
+                imagesManager.loadImages();
+                loadSiteImage(imagesManager.FirstImage());
+                nextButton.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Nie wybrano żadnego serwisu!");
+            }
         }
 
         private void loadSiteImage(SiteImage siteImage)
@@ -121,6 +118,8 @@ namespace FunnyImagesViewer
             try
             {
                 pictureBox.Load(siteImage.Address);
+                Console.WriteLine(pictureBox.Size);
+                Console.WriteLine(panel1.Size);
             }
             catch (Exception exception)
             {
@@ -129,7 +128,7 @@ namespace FunnyImagesViewer
             titleLabel.Text = WebUtility.HtmlDecode(siteImage.Title);
             int total = imagesManager.Count();
             int current = imagesManager.CurrentIndex();
-            countLabel.Text = current+1 + "/" + total;
+            countLabel.Text = current + 1 + "/" + total;
             siteLabel.Text = siteImage.Site;
         }
 
@@ -148,7 +147,7 @@ namespace FunnyImagesViewer
                 MessageBox.Show("Can't save GIFs.");
                 return;
             }
-            
+
             if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string ext = System.IO.Path.GetExtension(sfd.FileName);

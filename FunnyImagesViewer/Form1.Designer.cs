@@ -32,8 +32,6 @@
             this.prevButton = new System.Windows.Forms.Button();
             this.nextButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.outputBox = new System.Windows.Forms.RichTextBox();
-            this.addressBox = new System.Windows.Forms.TextBox();
             this.imgurProcessButton = new System.Windows.Forms.Button();
             this.gagCheckBox = new System.Windows.Forms.CheckBox();
             this.goButton = new System.Windows.Forms.Button();
@@ -54,10 +52,9 @@
             // pictureBox
             // 
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox.MaximumSize = new System.Drawing.Size(440, 0);
-            this.pictureBox.MinimumSize = new System.Drawing.Size(440, 0);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(440, 0);
+            this.pictureBox.Size = new System.Drawing.Size(330, 0);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox.TabIndex = 3;
             this.pictureBox.TabStop = false;
@@ -65,7 +62,7 @@
             // prevButton
             // 
             this.prevButton.Enabled = false;
-            this.prevButton.Location = new System.Drawing.Point(12, 434);
+            this.prevButton.Location = new System.Drawing.Point(96, 73);
             this.prevButton.Name = "prevButton";
             this.prevButton.Size = new System.Drawing.Size(75, 23);
             this.prevButton.TabIndex = 4;
@@ -75,7 +72,8 @@
             // 
             // nextButton
             // 
-            this.nextButton.Location = new System.Drawing.Point(397, 434);
+            this.nextButton.Enabled = false;
+            this.nextButton.Location = new System.Drawing.Point(177, 73);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(75, 23);
             this.nextButton.TabIndex = 5;
@@ -85,43 +83,38 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
+            this.panel1.AutoSize = true;
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.Controls.Add(this.pictureBox);
-            this.panel1.Location = new System.Drawing.Point(12, 38);
+            this.panel1.Location = new System.Drawing.Point(18, 102);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.MaximumSize = new System.Drawing.Size(1400, 900);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(460, 390);
+            this.panel1.Padding = new System.Windows.Forms.Padding(0, 0, 25, 0);
+            this.panel1.Size = new System.Drawing.Size(355, 0);
             this.panel1.TabIndex = 6;
-            // 
-            // outputBox
-            // 
-            this.outputBox.Location = new System.Drawing.Point(478, 38);
-            this.outputBox.Name = "outputBox";
-            this.outputBox.Size = new System.Drawing.Size(485, 390);
-            this.outputBox.TabIndex = 7;
-            this.outputBox.Text = "";
-            this.outputBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.outputBox_LinkClicked);
-            // 
-            // addressBox
-            // 
-            this.addressBox.Location = new System.Drawing.Point(479, 12);
-            this.addressBox.Name = "addressBox";
-            this.addressBox.Size = new System.Drawing.Size(402, 20);
-            this.addressBox.TabIndex = 8;
             // 
             // imgurProcessButton
             // 
-            this.imgurProcessButton.Location = new System.Drawing.Point(969, 376);
+            this.imgurProcessButton.Location = new System.Drawing.Point(177, 38);
             this.imgurProcessButton.Name = "imgurProcessButton";
             this.imgurProcessButton.Size = new System.Drawing.Size(75, 23);
             this.imgurProcessButton.TabIndex = 9;
             this.imgurProcessButton.Text = "imgur";
             this.imgurProcessButton.UseVisualStyleBackColor = true;
+            this.imgurProcessButton.Visible = false;
             this.imgurProcessButton.Click += new System.EventHandler(this.processButton_Click);
             // 
             // gagCheckBox
             // 
             this.gagCheckBox.AutoSize = true;
-            this.gagCheckBox.Location = new System.Drawing.Point(968, 12);
+            this.gagCheckBox.Checked = true;
+            this.gagCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.gagCheckBox.Location = new System.Drawing.Point(15, 12);
             this.gagCheckBox.Name = "gagCheckBox";
             this.gagCheckBox.Size = new System.Drawing.Size(50, 17);
             this.gagCheckBox.TabIndex = 10;
@@ -130,7 +123,7 @@
             // 
             // goButton
             // 
-            this.goButton.Location = new System.Drawing.Point(969, 405);
+            this.goButton.Location = new System.Drawing.Point(15, 73);
             this.goButton.Name = "goButton";
             this.goButton.Size = new System.Drawing.Size(75, 23);
             this.goButton.TabIndex = 11;
@@ -141,27 +134,27 @@
             // countLabel
             // 
             this.countLabel.AutoSize = true;
-            this.countLabel.Location = new System.Drawing.Point(367, 439);
+            this.countLabel.Location = new System.Drawing.Point(294, 13);
             this.countLabel.Name = "countLabel";
             this.countLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.countLabel.Size = new System.Drawing.Size(24, 13);
             this.countLabel.TabIndex = 12;
             this.countLabel.Text = "0/0";
-            this.countLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.countLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // titleLabel
             // 
             this.titleLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.titleLabel.Location = new System.Drawing.Point(9, 12);
+            this.titleLabel.Location = new System.Drawing.Point(12, 41);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(460, 20);
+            this.titleLabel.Size = new System.Drawing.Size(400, 20);
             this.titleLabel.TabIndex = 13;
             this.titleLabel.Text = "Title";
-            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(479, 434);
+            this.saveButton.Location = new System.Drawing.Point(258, 73);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 14;
@@ -172,7 +165,7 @@
             // imgurCheckBox
             // 
             this.imgurCheckBox.AutoSize = true;
-            this.imgurCheckBox.Location = new System.Drawing.Point(968, 35);
+            this.imgurCheckBox.Location = new System.Drawing.Point(71, 12);
             this.imgurCheckBox.Name = "imgurCheckBox";
             this.imgurCheckBox.Size = new System.Drawing.Size(52, 17);
             this.imgurCheckBox.TabIndex = 15;
@@ -182,7 +175,7 @@
             // siteLabel
             // 
             this.siteLabel.AutoSize = true;
-            this.siteLabel.Location = new System.Drawing.Point(93, 439);
+            this.siteLabel.Location = new System.Drawing.Point(334, 13);
             this.siteLabel.Name = "siteLabel";
             this.siteLabel.Size = new System.Drawing.Size(35, 13);
             this.siteLabel.TabIndex = 16;
@@ -190,38 +183,43 @@
             // 
             // _9gagProcessButton
             // 
-            this._9gagProcessButton.Location = new System.Drawing.Point(970, 347);
+            this._9gagProcessButton.Location = new System.Drawing.Point(258, 38);
             this._9gagProcessButton.Name = "_9gagProcessButton";
             this._9gagProcessButton.Size = new System.Drawing.Size(75, 23);
             this._9gagProcessButton.TabIndex = 17;
             this._9gagProcessButton.Text = "9gag";
             this._9gagProcessButton.UseVisualStyleBackColor = true;
+            this._9gagProcessButton.Visible = false;
             this._9gagProcessButton.Click += new System.EventHandler(this._9gagProcessButton_Click);
             // 
             // kwejkProcessButton
             // 
-            this.kwejkProcessButton.Location = new System.Drawing.Point(970, 318);
+            this.kwejkProcessButton.Location = new System.Drawing.Point(96, 38);
             this.kwejkProcessButton.Name = "kwejkProcessButton";
             this.kwejkProcessButton.Size = new System.Drawing.Size(75, 23);
             this.kwejkProcessButton.TabIndex = 18;
             this.kwejkProcessButton.Text = "kwejk";
             this.kwejkProcessButton.UseVisualStyleBackColor = true;
+            this.kwejkProcessButton.Visible = false;
             this.kwejkProcessButton.Click += new System.EventHandler(this.kwejkProcessButton_Click);
             // 
             // demotywatoryProcessButton
             // 
-            this.demotywatoryProcessButton.Location = new System.Drawing.Point(970, 289);
+            this.demotywatoryProcessButton.Location = new System.Drawing.Point(15, 38);
             this.demotywatoryProcessButton.Name = "demotywatoryProcessButton";
             this.demotywatoryProcessButton.Size = new System.Drawing.Size(75, 23);
             this.demotywatoryProcessButton.TabIndex = 19;
             this.demotywatoryProcessButton.Text = "demotywatory";
             this.demotywatoryProcessButton.UseVisualStyleBackColor = true;
+            this.demotywatoryProcessButton.Visible = false;
             this.demotywatoryProcessButton.Click += new System.EventHandler(this.demotywatoryProcessButton_Click);
             // 
             // demotywatoryCheckBox
             // 
             this.demotywatoryCheckBox.AutoSize = true;
-            this.demotywatoryCheckBox.Location = new System.Drawing.Point(968, 59);
+            this.demotywatoryCheckBox.Checked = true;
+            this.demotywatoryCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.demotywatoryCheckBox.Location = new System.Drawing.Point(137, 12);
             this.demotywatoryCheckBox.Name = "demotywatoryCheckBox";
             this.demotywatoryCheckBox.Size = new System.Drawing.Size(91, 17);
             this.demotywatoryCheckBox.TabIndex = 20;
@@ -231,7 +229,9 @@
             // kwejkCheckBox
             // 
             this.kwejkCheckBox.AutoSize = true;
-            this.kwejkCheckBox.Location = new System.Drawing.Point(968, 83);
+            this.kwejkCheckBox.Checked = true;
+            this.kwejkCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.kwejkCheckBox.Location = new System.Drawing.Point(234, 12);
             this.kwejkCheckBox.Name = "kwejkCheckBox";
             this.kwejkCheckBox.Size = new System.Drawing.Size(54, 17);
             this.kwejkCheckBox.TabIndex = 21;
@@ -242,7 +242,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1052, 469);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(379, 124);
             this.Controls.Add(this.kwejkCheckBox);
             this.Controls.Add(this.demotywatoryCheckBox);
             this.Controls.Add(this.demotywatoryProcessButton);
@@ -256,13 +258,12 @@
             this.Controls.Add(this.goButton);
             this.Controls.Add(this.gagCheckBox);
             this.Controls.Add(this.imgurProcessButton);
-            this.Controls.Add(this.addressBox);
-            this.Controls.Add(this.outputBox);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.nextButton);
             this.Controls.Add(this.prevButton);
             this.KeyPreview = true;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Image scrapper";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
@@ -279,8 +280,6 @@
         private System.Windows.Forms.Button prevButton;
         private System.Windows.Forms.Button nextButton;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RichTextBox outputBox;
-        private System.Windows.Forms.TextBox addressBox;
         private System.Windows.Forms.Button imgurProcessButton;
         private System.Windows.Forms.CheckBox gagCheckBox;
         private System.Windows.Forms.Button goButton;
