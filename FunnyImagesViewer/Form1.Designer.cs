@@ -127,7 +127,6 @@
             this.gagCheckBox.TabIndex = 10;
             this.gagCheckBox.Text = "9gag";
             this.gagCheckBox.UseVisualStyleBackColor = true;
-            this.gagCheckBox.CheckedChanged += new System.EventHandler(this.gagCheckBox_CheckedChanged);
             // 
             // goButton
             // 
@@ -179,7 +178,6 @@
             this.imgurCheckBox.TabIndex = 15;
             this.imgurCheckBox.Text = "Imgur";
             this.imgurCheckBox.UseVisualStyleBackColor = true;
-            this.imgurCheckBox.CheckedChanged += new System.EventHandler(this.imgurCheckBox_CheckedChanged);
             // 
             // siteLabel
             // 
@@ -229,7 +227,6 @@
             this.demotywatoryCheckBox.TabIndex = 20;
             this.demotywatoryCheckBox.Text = "demotywatory";
             this.demotywatoryCheckBox.UseVisualStyleBackColor = true;
-            this.demotywatoryCheckBox.CheckedChanged += new System.EventHandler(this.demotywatoryCheckBox_CheckedChanged);
             // 
             // kwejkCheckBox
             // 

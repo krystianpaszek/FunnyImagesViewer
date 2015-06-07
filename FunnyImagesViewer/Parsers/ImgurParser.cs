@@ -31,9 +31,12 @@ namespace FunnyImagesViewer.Parsers
             foreach (JToken jToken in array)
             {
                 SiteImage siteImage = JsonConvert.DeserializeObject<SiteImage>(jToken.ToString());
-                siteImage.Site = "Imgur";
-                images.Add(siteImage);
-                outputBoxSetter(siteImage.Address);
+                if (!siteImage.Address.Contains("/a/"))
+                {
+                    siteImage.Site = "Imgur";
+                    images.Add(siteImage);
+                    outputBoxSetter(siteImage.Address);
+                }
             }
         }
 
@@ -48,7 +51,8 @@ namespace FunnyImagesViewer.Parsers
             return resp;
         }
 
-        private JArray parseResponseStream(Stream stream) {
+        private JArray parseResponseStream(Stream stream)
+        {
             StreamReader reader = new StreamReader(stream, Encoding.UTF8);
             String responseString = reader.ReadToEnd();
 

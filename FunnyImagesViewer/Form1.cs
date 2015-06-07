@@ -87,24 +87,30 @@ namespace FunnyImagesViewer
             }
         }
 
-        private void gagCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void goButton_Click(object sender, EventArgs e)
         {
+            parserObjects = new List<SiteParser>();
+
+            if (kwejkCheckBox.Checked)
+            {
+                parserObjects.Add(new KwejkParser(addToOutputBox));
+            }
+
+            if (demotywatoryCheckBox.Checked)
+            {
+                parserObjects.Add(new DemotywatoryParser(addToOutputBox));
+            }
+
             if (gagCheckBox.Checked)
             {
                 parserObjects.Add(new _9gagParser(addToOutputBox));
             }
-            else
+
+            if (imgurCheckBox.Checked)
             {
-                foreach (SiteParser parser in parserObjects)
-                {
-                    if (parser is _9gagParser) parserObjects.Remove(parser);
-                }
+                parserObjects.Add(new ImgurParser(addToOutputBox));
             }
 
-        }
-
-        private void goButton_Click(object sender, EventArgs e)
-        {
             imagesManager = new ImagesManager(parserObjects);
             imagesManager.loadImages();
             loadSiteImage(imagesManager.FirstImage());
@@ -159,36 +165,6 @@ namespace FunnyImagesViewer
             }
         }
 
-        private void imgurCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (imgurCheckBox.Checked)
-            {
-                parserObjects.Add(new ImgurParser(addToOutputBox));
-            }
-            else
-            {
-                foreach (SiteParser parser in parserObjects)
-                {
-                    if (parser is ImgurParser) parserObjects.Remove(parser);
-                }
-            }
-        }
-
-        private void demotywatoryCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (demotywatoryCheckBox.Checked)
-            {
-                parserObjects.Add(new DemotywatoryParser(addToOutputBox));
-            }
-            else
-            {
-                foreach (SiteParser parser in parserObjects)
-                {
-                    if (parser is DemotywatoryParser) parserObjects.Remove(parser);
-                }
-            }
-        }
-
         private void _9gagProcessButton_Click(object sender, EventArgs e)
         {
             if (testingParser == null) testingParser = new _9gagParser(addToOutputBox);
@@ -206,7 +182,5 @@ namespace FunnyImagesViewer
             if (testingParser == null) testingParser = new DemotywatoryParser(addToOutputBox);
             testingParser.getImages();
         }
-
-        
     }
 }

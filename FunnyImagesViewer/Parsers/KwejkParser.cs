@@ -17,24 +17,18 @@ namespace FunnyImagesViewer.Parsers
 
         protected override void fetchMoreImages()
         {
-            outputBoxSetter("9gag:");
+            outputBoxSetter("kwejk.pl:");
             processNodes(getImagesNodes(getNextPageAdress()));
         }
 
         private string getNextPageAdress()
         {
-            String address;
-
             if (nextPageAddress == null)
             {
-                address = baseAddress;
-            }
-            else
-            {
-                address = nextPageAddress;
+                var nothing = getImagesNodes(baseAddress);
             }
 
-            return address;
+            return nextPageAddress;
         }
 
         private List<HtmlNode> getImagesNodes(string address)
@@ -45,7 +39,7 @@ namespace FunnyImagesViewer.Parsers
             doc.Load(w.OpenRead(address), Encoding.UTF8);
 
             List<HtmlNode> results = doc.DocumentNode.Descendants().
-                Where(x => (x.Name == "a" && x.Attributes["data-track-action"] != null && x.Attributes["data-track-action"].Value.IndexOf("Tre") != -1)).ToList();
+                Where(x => (x.Name == "a" && x.Attributes["data-track-action"] != null && x.Attributes["data-track-action"].Value.IndexOf("Tre") != -1 && !x.InnerHtml.Contains("video"))).ToList();
 
             HtmlNode nextPageNode = doc.DocumentNode.Descendants().
                 FirstOrDefault(x => (x.Name == "a" && x.Attributes["data-track-action"] != null && x.Attributes["data-track-action"].Value.IndexOf("Nast") != -1));

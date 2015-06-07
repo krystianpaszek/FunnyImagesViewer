@@ -11,7 +11,6 @@ namespace FunnyImagesViewer
         const int howManyImages = 10;
 
         //This method should return 10 SiteImages each time it's called
-        //public abstract List<SiteImage> getImages();
 
         public SiteParser(Action<String> outputBoxSetter)
         {

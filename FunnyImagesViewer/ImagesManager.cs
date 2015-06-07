@@ -16,9 +16,29 @@ namespace FunnyImagesViewer
 
         public void loadImages()
         {
+
+            List<SiteImage> temp = new List<SiteImage>();
+            int count = 10;
             foreach (SiteParser parser in parsers) {
                 List<SiteImage> l = parser.getImages();
-                if (l != null) images.AddRange(l);
+                if (l != null) {
+                    temp.AddRange(l);
+                    count = l.Count;
+                }
+            }
+
+            //zrobić foreacha
+            //where(co dziesiąty) 1, 11, 21, 31
+            //where(co dziesiąty+1) 2, 12, 22, 32
+            //itd i będzie dobrze
+            for (int i = 0; i < count; i++)
+            {
+                int j = i;
+                while (j < temp.Count)
+                {
+                    images.Add(temp[j]);
+                    j += count;
+                }
             }
         }
 
